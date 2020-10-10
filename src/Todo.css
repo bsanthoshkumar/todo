@@ -5,3 +5,10 @@
 .inputBox:focus {
   font-size: larger;
 }
+
+.heading {
+  font-size: 25px;
+  font-weight: 600;
+  outline: none;
+  border: none;
+}

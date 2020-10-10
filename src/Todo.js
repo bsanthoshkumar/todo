@@ -38,12 +38,12 @@ class Todo extends React.Component {
   render() {
     return (
       <div className={'mainDivision'}>
-        <h1>Todo</h1>
+        <Input value="Todo" className={'heading'}/>  <br/>
         <TodoItems
           todoItems={this.state.todoItems}
           updateHandler={this.updateTodoItem}
         />
-        <Input value={this.state.value} handleOnEnter={this.addTodoItem} />
+        <Input value={this.state.value} className={'inputBox'} handleOnEnter={this.addTodoItem} />
       </div>
     );
   }
