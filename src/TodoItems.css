@@ -5,8 +5,9 @@
   cursor: pointer;
 }
 
-.checked,
-.unchecked {
+.notDone,
+.doing,
+.done {
   width: 15px;
   height: 15px;
   border: solid 1px grey;
@@ -14,11 +15,15 @@
   margin-top: 3px;
 }
 
-.unchecked {
+.notDone {
   background-color: lightblue;
 }
 
-.checked {
+.doing {
+  background-color: orange;
+}
+
+.done {
   background-color: mediumseagreen;
 }
 

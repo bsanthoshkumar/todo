@@ -19,13 +19,22 @@ class Todo extends React.Component {
   }
 
   addTodoItem(text) {
-    const items = this.state.todoItems;
-    items.push({ name: text, isDone: false });
-    this.setState({ value: '', todoItems: items });
+    const todoItems = this.state.todoItems;
+    todoItems.push({ title: text, status: 'notDone' });
+    this.setState({ value: '', todoItems: todoItems });
   }
 
   updateTodoItem(id) {
-    this.setState(update(this.state, ['todoItems', id, 'isDone'], (x) => !x));
+    this.setState(
+      update(this.state, ['todoItems', id, 'status'], (status) => {
+        const toggledStatus = {
+          notDone: 'doing',
+          doing: 'done',
+          done: 'notDone',
+        };
+        return toggledStatus[status];
+      })
+    );
   }
 
   render() {
