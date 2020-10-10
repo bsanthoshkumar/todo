@@ -1,0 +1,13 @@
+.todoItem {
+  display: flex;
+  font-size: large;
+  margin-bottom: 10px;
+}
+
+.checkBox {
+  width: 15px;
+  height: 15px;
+  border: solid 1px grey;
+  margin-right: 10px;
+  margin-top: 3px;
+}
