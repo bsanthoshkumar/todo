@@ -4,10 +4,23 @@
   margin-bottom: 10px;
 }
 
-.checkBox {
+.checked,
+.unchecked {
   width: 15px;
   height: 15px;
   border: solid 1px grey;
   margin-right: 10px;
   margin-top: 3px;
+}
+
+.unchecked {
+  background-color: lightblue;
+}
+
+.checked {
+  background-color: mediumseagreen;
+}
+
+.strikedText {
+  text-decoration: line-through;
 }

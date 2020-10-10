@@ -1,12 +1,17 @@
 import React from 'react';
 import './TodoItems.css';
 
-const TodoItems = ({ todoItems }) =>
-  todoItems.map((todoItem, index) => {
+const TodoItems = ({ todoItems, updateHandler }) =>
+  todoItems.map(({ name, isDone }, index) => {
+    const className = isDone ? 'checked' : 'unchecked';
     return (
-      <div className={'todoItem'} key={index}>
-        <div className={'checkBox'}></div>
-        <div>{todoItem.name}</div>
+      <div
+        className={'todoItem'}
+        key={index}
+        onClick={() => updateHandler(index)}
+      >
+        <div className={className}></div>
+        <div className={isDone ? 'strikedText' : ''}>{name}</div>
       </div>
     );
   });
