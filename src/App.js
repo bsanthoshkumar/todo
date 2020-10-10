@@ -1,10 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Todo from './Todo';
 
-const App = (props) => {
-  return <Todo />;
-};
+const App = (props) => <Todo />;
 
 export default App;

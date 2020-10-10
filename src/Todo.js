@@ -13,23 +13,18 @@ const update = (obj, path, fn) => {
 class Todo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: '', todoItems: [] };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleOnEnter = this.handleOnEnter.bind(this);
-    this.updateCheckStatus = this.updateCheckStatus.bind(this);
+    this.state = { todoItems: [] };
+    this.addTodoItem = this.addTodoItem.bind(this);
+    this.updateTodoItem = this.updateTodoItem.bind(this);
   }
 
-  handleChange(text) {
-    this.setState(({ value }) => ({ value: text }));
-  }
-
-  handleOnEnter(text) {
+  addTodoItem(text) {
     const items = this.state.todoItems;
     items.push({ name: text, isDone: false });
     this.setState({ value: '', todoItems: items });
   }
 
-  updateCheckStatus(id) {
+  updateTodoItem(id) {
     this.setState(update(this.state, ['todoItems', id, 'isDone'], (x) => !x));
   }
 
@@ -39,13 +34,9 @@ class Todo extends React.Component {
         <h1>Todo</h1>
         <TodoItems
           todoItems={this.state.todoItems}
-          updateHandler={this.updateCheckStatus}
+          updateHandler={this.updateTodoItem}
         />
-        <Input
-          value={this.state.value}
-          onChangeHandler={this.handleChange}
-          onEnterHandler={this.handleOnEnter}
-        />
+        <Input value={this.state.value} handleOnEnter={this.addTodoItem} />
       </div>
     );
   }
