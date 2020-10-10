@@ -10,24 +10,23 @@ const update = (obj, path, fn) => {
   return obj;
 };
 
-const intialState = {
-  value: '',
-  todoItems: [
-    { name: 'Fill timesheets', isDone: true },
-    { name: 'Complete Todo Assignment', isDone: false },
-  ],
-};
-
 class Todo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = intialState;
+    this.state = { value: '', todoItems: [] };
     this.handleChange = this.handleChange.bind(this);
+    this.handleOnEnter = this.handleOnEnter.bind(this);
     this.updateCheckStatus = this.updateCheckStatus.bind(this);
   }
 
   handleChange(text) {
     this.setState(({ value }) => ({ value: text }));
+  }
+
+  handleOnEnter(text) {
+    const items = this.state.todoItems;
+    items.push({ name: text, isDone: false });
+    this.setState({ value: '', todoItems: items });
   }
 
   updateCheckStatus(id) {
@@ -43,9 +42,9 @@ class Todo extends React.Component {
           updateHandler={this.updateCheckStatus}
         />
         <Input
-          className={'inputBox'}
           value={this.state.value}
           onChangeHandler={this.handleChange}
+          onEnterHandler={this.handleOnEnter}
         />
       </div>
     );
