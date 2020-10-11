@@ -7,7 +7,7 @@ const TodoItem = ({ id, title, status, updateHandler, removeHandler }) => (
       <div className={`${status}`}></div>
       <div className={'title' , status === 'done' ? 'strikedText' : ''}>{title}</div>
     </div>
-    <div className={'closeButton'} onClick={() => removeHandler(id)}>X</div>
+    <div className={'closeButton'} onClick={() => removeHandler(id)}>x</div>
   </div>
 );
 

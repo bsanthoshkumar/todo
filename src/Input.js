@@ -4,26 +4,24 @@ import './Todo.css';
 class Input extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: this.props.text };
+    this.state = { value: '' };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnEnter = this.handleOnEnter.bind(this);
   }
 
   handleOnChange(text) {
-    this.setState(({value}) => ({ value: text }));
+    this.setState(({}) => ({ value: text }));
   }
 
   handleOnEnter() {
-    if(this.props.handleOnEnter) {
-      this.props.handleOnEnter(this.state.value);
-      this.setState(({value}) => ({ value: '' }));
-    }
+    this.props.handleOnEnter(this.state.value);
+    this.setState(({}) => ({ value: '' }));
   }
 
   render() {
     return (
       <input
-        className={this.props.className}
+        className={'inputBox'}
         value={this.state.value}
         onChange={(e) => this.handleOnChange(e.target.value)}
         onKeyPress={(e) => {

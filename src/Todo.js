@@ -13,23 +13,30 @@ const update = (obj, path, fn) => {
 class Todo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { todoItems: [] };
-    this.addTodoItem = this.addTodoItem.bind(this);
-    this.removeTodoItem = this.removeTodoItem.bind(this);
-    this.updateTodoItem = this.updateTodoItem.bind(this);
+    this.state = { title: 'Todo', todoItems: [] };
+    this.addItem = this.addItem.bind(this);
+    this.removeItem = this.removeItem.bind(this);
+    this.updateItem = this.updateItem.bind(this);
+    this.updateTitle = this.updateTitle.bind(this);
+    this.removeAllItems = this.removeAllItems.bind(this);
   }
 
-  addTodoItem(text) {
+  updateTitle(text) {
+    console.log(text);
+    this.setState(() => ({title: text}))
+  }
+
+  addItem(text) {
     this.state.todoItems.push({ title: text, status: 'notDone' });
     this.setState(this.state.todoItems);
   }
   
-  removeTodoItem(id) {
+  removeItem(id) {
     this.state.todoItems.splice(id, 1);
     this.setState(this.state.todoItems);
   }
 
-  updateTodoItem(id) {
+  updateItem(id) {
     const toggledStatus = {
       notDone: 'doing',
       doing: 'done',
@@ -41,16 +48,25 @@ class Todo extends React.Component {
     );
   }
 
+  removeAllItems() {
+    this.state.todoItems = [];
+    this.setState(this.state.todoItems);
+  }
+
   render() {
     return (
       <div className={'mainDivision'}>
-        <Input text='Todo' className={'heading'}/>  <br/>
+        <div className={'heading'}>
+          <div> {this.state.title} </div> 
+          <div className={'pointer'} onClick={this.removeAllItems}>x</div>
+        </div>
+        <br/>
         <TodoItems
           todoItems={this.state.todoItems}
-          updateHandler={this.updateTodoItem}
-          removeHandler={this.removeTodoItem}
+          updateHandler={this.updateItem}
+          removeHandler={this.removeItem}
         />
-        <Input text='' className={'inputBox'} handleOnEnter={this.addTodoItem} />
+        <Input handleOnEnter={this.addItem} />
       </div>
     );
   }
