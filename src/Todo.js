@@ -15,11 +15,17 @@ class Todo extends React.Component {
     super(props);
     this.state = { todoItems: [] };
     this.addTodoItem = this.addTodoItem.bind(this);
+    this.removeTodoItem = this.removeTodoItem.bind(this);
     this.updateTodoItem = this.updateTodoItem.bind(this);
   }
 
   addTodoItem(text) {
     this.state.todoItems.push({ title: text, status: 'notDone' });
+    this.setState(this.state.todoItems);
+  }
+  
+  removeTodoItem(id) {
+    this.state.todoItems.splice(id, 1);
     this.setState(this.state.todoItems);
   }
 
@@ -38,12 +44,13 @@ class Todo extends React.Component {
   render() {
     return (
       <div className={'mainDivision'}>
-        <Input value="Todo" className={'heading'}/>  <br/>
+        <Input text='Todo' className={'heading'}/>  <br/>
         <TodoItems
           todoItems={this.state.todoItems}
           updateHandler={this.updateTodoItem}
+          removeHandler={this.removeTodoItem}
         />
-        <Input value={this.state.value} className={'inputBox'} handleOnEnter={this.addTodoItem} />
+        <Input text='' className={'inputBox'} handleOnEnter={this.addTodoItem} />
       </div>
     );
   }
