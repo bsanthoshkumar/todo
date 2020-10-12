@@ -1,19 +1,30 @@
 .mainDivision {
   padding-left: 10%;
 }
-
-.inputBox:focus {
-  font-size: larger;
+.inputBox {
+  width: 300px;
+  font-size: 25px;
 }
 
 .heading {
-  font-size: 20px;
-  font-weight: 500;
   display: flex;
   justify-content: space-between;
-  width: 200px;
+  width: 300px;
 }
 
-.pointer {
+.title {
+  font-size: 30px;
+  font-weight: 600;
+  border: none;
+  width: 280px;
+}
+
+.removeButton {
+  font-size: 25px;
   cursor: pointer;
+}
+
+.hide {
+  cursor: pointer;
+  display: none;
 }

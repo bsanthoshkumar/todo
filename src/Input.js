@@ -10,12 +10,12 @@ class Input extends React.Component {
   }
 
   handleOnChange(text) {
-    this.setState(({}) => ({ value: text }));
+    this.setState(() => ({ value: text }));
   }
 
   handleOnEnter() {
     this.props.handleOnEnter(this.state.value);
-    this.setState(({}) => ({ value: '' }));
+    this.setState(() => ({ value: '' }));
   }
 
   render() {
