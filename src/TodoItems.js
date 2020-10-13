@@ -1,15 +1,22 @@
 import React from 'react';
 import './TodoItems.css';
+import useHover from './useHover';
 
-const TodoItem = ({ id, title, status, updateItem, removeItem }) => (
-  <div className='flex' onMouseOver={(e) => e.target.lastChild.classList.remove('hide')} onMouseLeave={(e) => e.target.lastChild.classList.add('hide')}>
-    <span className='todoItem' onClick={() => updateItem(id)} onMouseOver={(e) => e.stopPropagation()} onMouseLeave={(e) => e.stopPropagation()}>
+const TodoItem = ({ id, title, status, updateItem, removeItem }) => {
+  const [ref, isHovered] = useHover();
+
+  return (
+    <div className='flex' ref={ref}>
+    <span className='todoItem' onClick={() => updateItem(id)}>
       <span className={`${status}`}></span>
       <span className={`itemTitle ${status === 'done' ? 'strikedText' : ''}`}>{title}</span>
     </span>
-    <span className='closeButton hide' onClick={() => removeItem(id)} onMouseOver={(e) => e.stopPropagation()} onMouseLeave={(e) => e.stopPropagation()}>x</span>
+    <span className='closeButton' onClick={() => removeItem(id)}> 
+      {isHovered ? 'x' : ''}
+    </span>
   </div>
-);
+  );
+}
 
 const TodoItems = ({ todoItems, updateItem, removeItem }) =>
   todoItems.map(({ title, status }, index) => (
