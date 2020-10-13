@@ -1,47 +1,28 @@
-import React, { useState } from 'react';
-import TodoItems from './TodoItems.js';
-import './Todo.css';
+import React, { useReducer } from 'react';
 import Input from './Input';
 import Header from './Header.js';
+import TodoItems from './TodoItems.js';
+import { todoReducer, initialState } from './todoReducer';
+import './Todo.css';
 
 const Todo = (props) => {
-  const [title, updateTitle] = useState('Todo');
-  const [nextId, updateNextId] = useState(1);
-  const [todoItems, updateTodoItems] = useState([]);
+  const [state, dispatch] = useReducer(todoReducer, initialState);
 
-  const addItem = (text) => {
-    updateTodoItems(
-      todoItems.concat([{ id: nextId, title: text, status: 'notDone' }])
-    );
-    updateNextId(nextId + 1);
-  };
-
-  const removeItem = (itemId) => {
-    updateTodoItems((items) => items.filter(({ id }) => id !== itemId));
-  };
-
-  const updateItem = (id) => {
-    updateTodoItems(() => {
-      const items = todoItems.map((item) => Object.assign({}, item));
-      const item = items.find((item) => item.id === id);
-      item.status = { notDone: 'doing', doing: 'done', done: 'notDone' }[
-        item.status
-      ];
-      return items;
-    });
-  };
-
-  const removeAllItems = () => {
-    updateTitle('Todo');
-    updateNextId(1);
-    updateTodoItems([]);
-  };
+  const updateTitle = (text) => dispatch({ type: 'UPDATE_TITLE', text });
+  const addItem = (text) => dispatch({ type: 'ADD_ITEM', text });
+  const removeItem = (id) => dispatch({ type: 'REMOVE_ITEM', id });
+  const updateItem = (id) => dispatch({ type: 'UPDATE_ITEM', id });
+  const removeAllItems = () => dispatch({ type: 'RESET' });
 
   return (
     <div className="mainDivision">
-      <Header title={title} onClick={removeAllItems} onChange={updateTitle} />
+      <Header
+        title={state.title}
+        onClick={removeAllItems}
+        onChange={updateTitle}
+      />
       <TodoItems
-        todoItems={todoItems}
+        todoItems={state.items}
         updateItem={updateItem}
         removeItem={removeItem}
       />
