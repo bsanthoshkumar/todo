@@ -16,7 +16,7 @@ const Todo  = (props) => {
   const [title, updateTitle] = useState('Todo');
 
   const addItem = (text) => {
-    updateTodoItems(todoItems.concat({title: text, status: 'notDone'}))
+    updateTodoItems(todoItems.concat([{title: text, status: 'notDone'}]))
   }
   
   const removeItem = (id) => {
