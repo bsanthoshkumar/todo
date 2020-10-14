@@ -1,18 +1,26 @@
-import React, { useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from './Input';
 import Header from './Header.js';
 import TodoItems from './TodoItems.js';
-import { todoReducer, initialState } from './todoReducer';
 import './Todo.css';
+import TodoAPI from './TodoAPI';
 
 const Todo = (props) => {
-  const [state, dispatch] = useReducer(todoReducer, initialState);
+  const [state, setState] = useState(null);
+  useEffect(() => {
+    TodoAPI.initialize().then((s) => setState(s));
+  }, []);
 
-  const updateTitle = (text) => dispatch({ type: 'UPDATE_TITLE', text });
-  const addItem = (text) => dispatch({ type: 'ADD_ITEM', text });
-  const removeItem = (id) => dispatch({ type: 'REMOVE_ITEM', id });
-  const updateItem = (id) => dispatch({ type: 'UPDATE_ITEM', id });
-  const removeAllItems = () => dispatch({ type: 'RESET' });
+  const updateTitle = (text) =>
+    TodoAPI.updateTitle(text).then((s) => setState(s));
+  const addItem = (text) => TodoAPI.addItem(text).then((s) => setState(s));
+  const removeItem = (id) => TodoAPI.removeItem(id).then((s) => setState(s));
+  const updateItem = (id) => TodoAPI.updateItem(id).then((s) => setState(s));
+  const removeAllItems = () => TodoAPI.reset().then((s) => setState(s));
+
+  if (state == null) {
+    return 'Loading...';
+  }
 
   return (
     <div className="mainDivision">
